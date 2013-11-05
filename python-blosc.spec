@@ -5,7 +5,7 @@
 Summary:	Python wrapper for the blosc high performance compressor
 Name:		python-%{module}
 Version:	1.1
-Release:	5%{?dist}
+Release:	6%{?dist}
 License:	MIT
 URL:		https://github.com/FrancescAlted/python-blosc
 Source0:	https://pypi.python.org/packages/source/b/%{module}/%{module}-%{version}.tar.gz
@@ -18,8 +18,11 @@ Python wrapper for the Blosc high performance compressor.
 %prep
 %setup -q -n %{module}-%{version}
 
+# Don't enable SSE2 optimizations
+sed -i "s|CFLAGS\.append(\"-msse2\")|pass|" setup.py
+
 %build
-%{__python2} setup.py build 
+CFLAGS="%{optflags}" %{__python2} setup.py build 
 # Fix lib perms
 find . -name "blosc_extension.so" -exec chmod 0755 {} \;
 
@@ -32,6 +35,9 @@ find . -name "blosc_extension.so" -exec chmod 0755 {} \;
 %{python2_sitearch}/blosc-%{version}*-py*.egg-info
 
 %changelog
+* Tue Nov 05 2013 Thibault North <tnorth@fedoraproject.org> - 1.1-6
+- Disable SSE2 optimizations
+
 * Tue Nov 05 2013 Thibault North <tnorth@fedoraproject.org> - 1.1-5
 - Final cosmetic fixes
 
