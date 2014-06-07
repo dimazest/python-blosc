@@ -5,7 +5,7 @@
 Summary:	Python wrapper for the blosc high performance compressor
 Name:		python-%{module}
 Version:	1.2.3
-Release:	2%{?dist}
+Release:	3%{?dist}
 License:	MIT
 URL:		https://github.com/FrancescAlted/python-blosc
 Source0:	https://pypi.python.org/packages/source/b/%{module}/%{module}-%{version}.tar.gz
@@ -37,6 +37,9 @@ find . -name "blosc_extension.so" -exec chmod 0755 {} \;
 %{python2_sitearch}/blosc-%{version}*-py*.egg-info
 
 %changelog
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.2.3-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
 * Wed Mar 26 2014 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 1.2.3-2
 - Rebuild for blosc
 
